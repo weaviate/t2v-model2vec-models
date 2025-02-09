@@ -1,0 +1,6 @@
+__pycache__
+models/
+model/
+nltk_data
+.venv/
+.vscode/

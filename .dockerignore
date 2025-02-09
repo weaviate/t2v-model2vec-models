@@ -1,0 +1,11 @@
+__pycache__
+.github
+.venv
+.vscode
+cicd
+models
+Dockerfile
+nltk_data
+smoke_test.py
+smoke_auth_test.py
+requirements-test.txt
