@@ -15,8 +15,8 @@ jobs:
           - model_name: minishlab/potion-base-4M
             model_tag_name: minishlab-potion-base-4M
     env:
-      LOCAL_REPO: model2vec
-      REMOTE_REPO: semitechnologies/model2vec
+      LOCAL_REPO: model2vec-inference
+      REMOTE_REPO: semitechnologies/model2vec-inference
       MODEL_NAME: ${{matrix.model_name}}
       MODEL_TAG_NAME: ${{matrix.model_tag_name}}
     steps:
