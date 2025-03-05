@@ -1,4 +1,5 @@
 __pycache__
+.pytest_cache
 .github
 .venv
 .vscode
@@ -8,4 +9,5 @@ Dockerfile
 nltk_data
 smoke_test.py
 smoke_auth_test.py
+smoke_validate_cache_test.py
 requirements-test.txt
