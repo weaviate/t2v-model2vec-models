@@ -1,4 +1,4 @@
-model2vec===0.3.9
-fastapi==0.115.8
+model2vec===0.4.1
+fastapi==0.115.11
 uvicorn==0.34.0
-cachetools==5.5.0
+cachetools==5.5.2
