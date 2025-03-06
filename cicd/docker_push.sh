@@ -32,13 +32,9 @@ function init() {
 
 function push_tag() {
   if [ ! -z "$git_tag" ] && [ "$GITHUB_REF_TYPE" == "tag" ]; then
-    model_name_part=$model_name
-    if [ "$onnx_runtime" == "true" ]; then
-      model_name_part="$model_name-onnx"
-    fi
-    tag_git="$remote_repo:$model_name_part-$git_tag"
-    tag_latest="$remote_repo:$model_name_part-latest"
-    tag="$remote_repo:$model_name_part"
+    tag_git="$remote_repo:$model_name-$git_tag"
+    tag_latest="$remote_repo:$model_name-latest"
+    tag="$remote_repo:$model_name"
 
     echo "Tag & Push $tag, $tag_latest, $tag_git"
     docker buildx build --platform=linux/arm64,linux/amd64 \
