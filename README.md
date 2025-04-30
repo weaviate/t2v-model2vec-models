@@ -3,7 +3,7 @@
 🎯 Overview
 -----------
 
-This is the the inference container modified from https://github.com/weaviate/t2v-model2vec-models, so that I could input and output embedding in an openai-compatible way (but not yet support upload in batch in single request).
+This is the the inference container modified from https://github.com/weaviate/t2v-model2vec-models, so that I could input and output embedding in an openai-compatible way.
 
 It is built to support only static (`model2vec`) models.
 
