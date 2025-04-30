@@ -24,15 +24,16 @@ class VectorInputConfig(BaseModel):
 
 
 class VectorInput(BaseModel):
-    text: str
+    input: str
+    model: str
     config: Optional[VectorInputConfig] = None
 
     def __hash__(self):
-        return hash((self.text, self.config))
+        return hash((self.input, self.config))
 
     def __eq__(self, other):
         if isinstance(other, VectorInput):
-            return self.text == other.text and self.config == other.config
+            return self.input == other.input and self.config == other.config
         return False
 
 
@@ -58,7 +59,7 @@ class Vectorizer:
         self.executor = ThreadPoolExecutor()
         self.vectorizer = Model2VecVectorizer(model_path)
 
-    async def vectorize(self, text: str, config: VectorInputConfig):
+    async def vectorize(self, input: str, config: VectorInputConfig):
         return await asyncio.wrap_future(
-            self.executor.submit(self.vectorizer.vectorize, text, config)
+            self.executor.submit(self.vectorizer.vectorize, input, config)
         )

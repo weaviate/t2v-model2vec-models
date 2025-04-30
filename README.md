@@ -3,9 +3,7 @@
 🎯 Overview
 -----------
 
-This is the the inference container which can be used with Weaviate
-`text2vec-transformers` module. You can download it directly from Dockerhub
-using one of the pre-built images.
+This is the the inference container modified from https://github.com/weaviate/t2v-model2vec-models, so that I could input and output embedding in an openai-compatible way (but not yet support upload in batch in single request).
 
 It is built to support only static (`model2vec`) models.
 
@@ -13,14 +11,14 @@ It is built to support only static (`model2vec`) models.
 surpass other static embeddings models like GLoVe and BPEmb in performance,
 and the pre-built Docker images containing these models are notably compact in size.
 
-🐳 Pre-built images
--------------------
+🐳 Build your own image
+--------------------------
 
-|Model Name|Image Name|
-|---|---|
-|[`minishlab/potion-base-4M`](https://huggingface.co/minishlab/potion-base-4M)|`semitechnologies/model2vec-inference:minishlab-potion-base-4M`|
-|[`minishlab/potion-base-8M`](https://huggingface.co/minishlab/potion-base-8M)|`semitechnologies/model2vec-inference:minishlab-potion-base-8M`|
-|[`minishlab/potion-base-32M`](https://huggingface.co/minishlab/potion-base-32M)|`semitechnologies/model2vec-inference:minishlab-potion-base-32M`|
+- Build the docker container: `docker build -t potion-base-8m:latest . --build-arg MODEL_NAME=minishlab/potion-base-8M`
+
+- Start the docker container: `docker run -p 8080:8080 potion-base-8m`
+
+- Stop the running docker container: `docker stop <CONTAINER_NAME>`
 
 🔗 Useful Resources
 --------------------

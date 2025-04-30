@@ -1,3 +1,5 @@
+# Reference: https://github.com/BerriAI/litellm/issues/1647
+
 import os
 from typing import Optional, List
 from logging import getLogger
@@ -5,7 +7,6 @@ from fastapi import FastAPI, Depends, Response, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from vectorizer import Vectorizer, VectorInput
 from meta import Meta
-
 
 logger = getLogger("uvicorn")
 
@@ -66,17 +67,23 @@ def meta(
         return {"error": "Unauthorized"}
 
 
-@app.post("/vectors")
-@app.post("/vectors/")
-async def vectorize(
-    item: VectorInput,
-    response: Response,
-    auth: Optional[HTTPAuthorizationCredentials] = Depends(get_bearer_token),
-):
+@app.post("/v1/embeddings")
+@app.post("/embeddings")
+async def embed(item: VectorInput,
+                response: Response,
+                auth: Optional[HTTPAuthorizationCredentials] = Depends(get_bearer_token)):
     if is_authorized(auth):
         try:
-            vector = await vec.vectorize(item.text, item.config)
-            return {"text": item.text, "vector": vector.tolist(), "dim": len(vector)}
+            vector = await vec.vectorize(item.input, item.config)
+            return {
+                "object": "list",
+                "data": [{
+                    "object": "embedding",
+                    "index": 0,
+                    "embedding": vector.tolist()
+                }],
+                "model": item.model, 
+            }
         except Exception as e:
             logger.exception("Something went wrong while vectorizing data.")
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
