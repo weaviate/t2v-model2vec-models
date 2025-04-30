@@ -1,0 +1,13 @@
+services:
+  model2vec-potion-base-8m:
+    container_name: model2vec-potion-base-8m
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODEL_NAME: "minishlab/potion-base-8M"
+    image: model2vec-potion-base-8m
+    environment:
+      - MODEL_NAME=minishlab/potion-base-8M
+    ports:
+      - "8012:8080"

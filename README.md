@@ -11,6 +11,39 @@ It is built to support only static (`model2vec`) models.
 surpass other static embeddings models like GLoVe and BPEmb in performance,
 and the pre-built Docker images containing these models are notably compact in size.
 
+The reason of forking this repo
+-------------------------------
+
+Because I prefer openai-compatible endpoint for this embedding model: `minishlab/potion-base-8M`.
+
+Worth to note that, this `minishlab/potion-base-8M` is a distilled version of the `baai/bge-base-en-v1.5` Sentence Transformer. It uses static embeddings, allowing text embeddings to be computed orders of magnitude faster on both GPU and CPU. It is designed for applications where computational resources are limited or where real-time performance is critical.
+
+Below is the format of curl request to get the embedding output:
+
+```bash
+curl -X 'POST' \
+  'http://localhost:8080/v1/embeddings' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "input": "hi, how are you",
+  "model": "minishlab/potion-base-8M"
+}'
+```
+
+OR
+
+```bash
+curl -X 'POST' \
+  'http://localhost:8080/v1/embeddings' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "input": ["hi, how are you", "thank you"],
+  "model": "minishlab/potion-base-8M"
+}'
+```
+
 🐳 Build your own image
 --------------------------
 
