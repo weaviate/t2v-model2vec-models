@@ -74,15 +74,18 @@ async def embed(item: VectorInput,
                 auth: Optional[HTTPAuthorizationCredentials] = Depends(get_bearer_token)):
     if is_authorized(auth):
         try:
+            if isinstance(item.input, list):
+                item.input = tuple(item.input)  # Convert list to tuple for hashability
+            
             vector = await vec.vectorize(item.input, item.config)
             return {
                 "object": "list",
                 "data": [{
                     "object": "embedding",
-                    "index": 0,
-                    "embedding": vector.tolist()
-                }],
-                "model": item.model, 
+                    "index": index,
+                    "embedding": embedding_item
+                } for index, embedding_item in enumerate(vector.tolist())],
+                "model": item.model
             }
         except Exception as e:
             logger.exception("Something went wrong while vectorizing data.")
