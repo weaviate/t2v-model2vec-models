@@ -16,14 +16,13 @@ and the pre-built Docker images containing these models are notably compact in s
 🐳 Pre-built images
 -------------------
 
-|Model Name|Image Name|
-|---|---|
-|[`minishlab/potion-multilingual-128M`](https://huggingface.co/minishlab/potion-multilingual-128M)|`semitechnologies/model2vec-inference:minishlab-potion-multilingual-128M`|
-|[`minishlab/potion-retrieval-32M`](https://huggingface.co/minishlab/potion-retrieval-32M)|`semitechnologies/model2vec-inference:minishlab-potion-retrieval-32M`|
-|[`minishlab/potion-base-4M`](https://huggingface.co/minishlab/potion-base-4M)|`semitechnologies/model2vec-inference:minishlab-potion-base-4M`|
-|[`minishlab/potion-base-4M`](https://huggingface.co/minishlab/potion-base-4M)|`semitechnologies/model2vec-inference:minishlab-potion-base-4M`|
-|[`minishlab/potion-base-8M`](https://huggingface.co/minishlab/potion-base-8M)|`semitechnologies/model2vec-inference:minishlab-potion-base-8M`|
-|[`minishlab/potion-base-32M`](https://huggingface.co/minishlab/potion-base-32M)|`semitechnologies/model2vec-inference:minishlab-potion-base-32M`|
+|Model Name|Language|Image Name|
+|---|---|---|
+|[`potion-multilingual-128M`](https://huggingface.co/minishlab/potion-multilingual-128M)|Multilingual|`semitechnologies/model2vec-inference:minishlab-potion-multilingual-128M`|
+|[`potion-retrieval-32M`](https://huggingface.co/minishlab/potion-retrieval-32M)|English|`semitechnologies/model2vec-inference:minishlab-potion-retrieval-32M`|
+|[`potion-base-4M`](https://huggingface.co/minishlab/potion-base-4M)|English|`semitechnologies/model2vec-inference:minishlab-potion-base-4M`|
+|[`potion-base-8M`](https://huggingface.co/minishlab/potion-base-8M)|English|`semitechnologies/model2vec-inference:minishlab-potion-base-8M`|
+|[`potion-base-32M`](https://huggingface.co/minishlab/potion-base-32M)|English|`semitechnologies/model2vec-inference:minishlab-potion-base-32M`|
 
 🔗 Useful Resources
 --------------------
