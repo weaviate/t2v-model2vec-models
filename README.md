@@ -18,6 +18,9 @@ and the pre-built Docker images containing these models are notably compact in s
 
 |Model Name|Image Name|
 |---|---|
+|[`minishlab/potion-multilingual-128M`](https://huggingface.co/minishlab/potion-multilingual-128M)|`semitechnologies/model2vec-inference:minishlab-potion-multilingual-128M`|
+|[`minishlab/potion-retrieval-32M`](https://huggingface.co/minishlab/potion-retrieval-32M)|`semitechnologies/model2vec-inference:minishlab-potion-retrieval-32M`|
+|[`minishlab/potion-base-4M`](https://huggingface.co/minishlab/potion-base-4M)|`semitechnologies/model2vec-inference:minishlab-potion-base-4M`|
 |[`minishlab/potion-base-4M`](https://huggingface.co/minishlab/potion-base-4M)|`semitechnologies/model2vec-inference:minishlab-potion-base-4M`|
 |[`minishlab/potion-base-8M`](https://huggingface.co/minishlab/potion-base-8M)|`semitechnologies/model2vec-inference:minishlab-potion-base-8M`|
 |[`minishlab/potion-base-32M`](https://huggingface.co/minishlab/potion-base-32M)|`semitechnologies/model2vec-inference:minishlab-potion-base-32M`|
