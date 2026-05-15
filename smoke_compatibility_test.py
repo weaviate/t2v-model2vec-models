@@ -51,6 +51,24 @@ class CompatibilityTest(unittest.TestCase):
             payload = json.loads(resp.read())
         self.assertGreater(len(payload["vector"]), 0)
 
+    def test_request_with_content_type_header(self):
+        """JSON body with Content-Type: application/json must return 200.
+
+        Counterpart to test_request_without_content_type_header — ensures
+        standard well-behaved clients are unaffected by strict_content_type=False.
+        """
+        body = json.dumps({"text": "The London Eye is a ferris wheel."}).encode()
+        req = urllib.request.Request(
+            self.url + "/vectors",
+            data=body,
+            method="POST",
+            headers={"Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req) as resp:
+            self.assertEqual(200, resp.status)
+            payload = json.loads(resp.read())
+        self.assertGreater(len(payload["vector"]), 0)
+
     def test_request_with_extra_body_fields(self):
         """Extra JSON fields sent by the Weaviate transformer client must be ignored.
 
