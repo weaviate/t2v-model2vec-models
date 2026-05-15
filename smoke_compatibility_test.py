@@ -17,11 +17,12 @@ class CompatibilityTest(unittest.TestCase):
       - test_cached_vector_is_deterministic        → cache correctness after concurrent writes
     """
 
-    def setUp(self):
-        self.url = "http://localhost:8000"
+    @classmethod
+    def setUpClass(cls):
+        cls.url = "http://localhost:8000"
         for i in range(100):
             try:
-                res = requests.get(self.url + "/.well-known/ready")
+                res = requests.get(cls.url + "/.well-known/ready")
                 if res.status_code == 204:
                     return
             except Exception as e:
@@ -103,7 +104,7 @@ class CompatibilityTest(unittest.TestCase):
         for th in threads:
             th.join()
 
-        self.assertEqual([], errors, f"Concurrent requests failed:\n" + "\n".join(errors))
+        self.assertEqual([], errors, "Concurrent requests failed:\n" + "\n".join(errors))
 
     def test_task_type_configs(self):
         """Both passage and query task_type values produce a valid vector."""

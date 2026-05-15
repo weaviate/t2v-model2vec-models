@@ -9,7 +9,7 @@ pip3 install -r requirements-test.txt
 echo "Running tests with authorization on"
 
 container_id=$(docker run -d -it -e AUTHENTICATION_ALLOWED_TOKENS='token1,token2' -p "8000:8080" "$local_repo")
-trap "docker stop $container_id" EXIT
+trap 'docker stop "$container_id" || true' EXIT
 
 python3 smoke_auth_test.py
 
@@ -19,7 +19,7 @@ trap - EXIT
 echo "Running tests without authorization"
 
 container_id=$(docker run -d -it -p "8000:8080" "$local_repo")
-trap "docker stop $container_id" EXIT
+trap 'docker stop "$container_id" || true' EXIT
 
 echo "Running smoke tests"
 python3 smoke_test.py
