@@ -45,7 +45,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=lifespan, strict_content_type=False)
 
 
 @app.get("/.well-known/live", response_class=Response)
