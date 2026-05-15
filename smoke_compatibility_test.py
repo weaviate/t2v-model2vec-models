@@ -2,7 +2,6 @@ import json
 import time
 import threading
 import unittest
-import urllib.request
 
 import requests
 
@@ -37,19 +36,15 @@ class CompatibilityTest(unittest.TestCase):
         We disable it (strict_content_type=False) so that clients such as
         Weaviate's shared transformer Go client — which never set the header —
         keep working after a FastAPI version bump.
+
+        requests.post(data=bytes) sends the raw body without adding a
+        Content-Type header, mirroring Go's http.NewRequestWithContext with
+        no header set. Using json= instead would silently add the header.
         """
         body = json.dumps({"text": "The London Eye is a ferris wheel."}).encode()
-        req = urllib.request.Request(
-            self.url + "/vectors",
-            data=body,
-            method="POST",
-        )
-        # Deliberately no Content-Type header — mirrors the Go http.NewRequestWithContext
-        # call that was missing req.Header.Set("Content-Type", "application/json").
-        with urllib.request.urlopen(req) as resp:
-            self.assertEqual(200, resp.status)
-            payload = json.loads(resp.read())
-        self.assertGreater(len(payload["vector"]), 0)
+        res = requests.post(self.url + "/vectors", data=body)
+        self.assertEqual(200, res.status_code, f"Expected 200, got {res.status_code}: {res.text}")
+        self.assertGreater(len(res.json()["vector"]), 0)
 
     def test_request_with_content_type_header(self):
         """JSON body with Content-Type: application/json must return 200.
@@ -58,16 +53,13 @@ class CompatibilityTest(unittest.TestCase):
         standard well-behaved clients are unaffected by strict_content_type=False.
         """
         body = json.dumps({"text": "The London Eye is a ferris wheel."}).encode()
-        req = urllib.request.Request(
+        res = requests.post(
             self.url + "/vectors",
             data=body,
-            method="POST",
             headers={"Content-Type": "application/json"},
         )
-        with urllib.request.urlopen(req) as resp:
-            self.assertEqual(200, resp.status)
-            payload = json.loads(resp.read())
-        self.assertGreater(len(payload["vector"]), 0)
+        self.assertEqual(200, res.status_code, f"Expected 200, got {res.status_code}: {res.text}")
+        self.assertGreater(len(res.json()["vector"]), 0)
 
     def test_request_with_extra_body_fields(self):
         """Extra JSON fields sent by the Weaviate transformer client must be ignored.
