@@ -1,5 +1,6 @@
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
+from threading import Lock
 from pydantic import BaseModel
 from typing import Optional
 from cachetools import cached, TTLCache
@@ -42,7 +43,7 @@ class Model2VecVectorizer:
     def __init__(self, model_path: str):
         self.model = StaticModel.load_local(model_path)
 
-    @cached(cache=TTLCache(maxsize=1024, ttl=600))
+    @cached(cache=TTLCache(maxsize=1024, ttl=600), lock=Lock())
     def vectorize(self, text: str, config: VectorInputConfig):
         embeddings = self.model.encode([text], use_multiprocessing=True)
         return embeddings[0]
