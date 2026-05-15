@@ -44,7 +44,7 @@ class Model2VecVectorizer:
 
     @cached(cache=TTLCache(maxsize=1024, ttl=600))
     def vectorize(self, text: str, config: VectorInputConfig):
-        embeddings = self.model.encode([text], use_multiprocessing=True)
+        embeddings = self.model.encode([text], use_multiprocessing=False)
         return embeddings[0]
 
 
