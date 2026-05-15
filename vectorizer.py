@@ -41,7 +41,7 @@ class Model2VecVectorizer:
     model: StaticModel
 
     def __init__(self, model_path: str):
-        self.model = StaticModel.load_local(model_path)
+        self.model = StaticModel.from_pretrained(model_path)
 
     @cached(cache=TTLCache(maxsize=1024, ttl=600), lock=Lock())
     def vectorize(self, text: str, config: VectorInputConfig):
